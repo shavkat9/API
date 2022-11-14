@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="container">
+        <div class="left">
+            <input type="text">
+        </div>
+        <div class="right">
+            <select class="category__select" name="category">
+                
+            </select>
+        </div>
+    </div>
+     -->
+     <!-- <table>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+        </tr>
+        <tbody class="box">
+            <tr>
+                
+            </tr>
+        </tbody>
+     </table> -->
+     <div class="output"></div>
+     <button id="getPosts">getposts</button>
+
+
+    <script>
+        document.getElementById('getPosts').addEventListener('click', getPosts);
+        function getPosts(){
+            fetch('https://www.omdbapi.com/?apikey=7e789dc5&s=panda')
+            .then((res) => res.json())
+            .then(data => {
+                console.log(data)
+                let output = '<h2>Get posts</h2>'
+                data.Search.forEach(post => {
+                    output +=  `
+                    <ul> 
+                        <li>${post.Title}</li>
+                        <li>${post.Poster}</li>
+                        <li>${post.Year}</li>
+                        <li>${post.imdbID}</li>
+                        <li>${post.Type}</li>
+                       
+                    </ul>
+                     `;
+                });
+                document.querySelector('.output').innerHTML = output;
+            })
+        }
+    </script>
+</body>
+</html>
